@@ -14,7 +14,7 @@ import lombok.Data;
  
 @Data
 @Entity
-public class Empleado {
+class Empleado {
 	/*
 	ID, nombre y rol son los atributos de nuestro objeto de dominio, 
 	el primero se marca con más anotaciones JPA para indicar que es la clave principal y se rellena automáticamente
@@ -38,5 +38,7 @@ public class Empleado {
 	datos y la clasificación, cuando sea apropiado. Spring Data sintetiza implementaciones basadas en las convenciones encontradas 
 	en la denominación de los métodos en la interfaz.
 	*/
+	
+	
 
 }
