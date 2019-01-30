@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+//USAREMOS LA INTERFACE PARA OBTENER LOS MÉTODOS DE BÚSQUEDA, EDICIÓN, ELIMINAR... (find, save, delete...)
  interface RepositorioEmpleado extends JpaRepository<Empleado, Long>{
 
 }
