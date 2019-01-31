@@ -1,13 +1,17 @@
 package com.example.demo;
 /*Para envolver el repositorio con una capa web, se debe recurrir a Spring MVC. Gracias a Spring Boot, hay poca infraestructura para codificar. 
- * En cambio, podemos centrarnos en acciones:
+ * PUT --> modificar
+ * GET --> obtener
+ * POST --> crear
  * */
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,16 +34,47 @@ import org.springframework.web.bind.annotation.RestController;
 	 Empleado nuevoEmpleado(@RequestBody Empleado nuevoEmpleado) {
 		 return repositorio.save(nuevoEmpleado);
 	 }
-	 //Obtendremos un empleado buscándolo por su Id
+	 //Obtendremos un empleado buscándolo por su Id. Si no lo encuentra lanzará una excepeción controlada
 	 @GetMapping("/empleados/{Id}")
 	 Empleado uno(@PathVariable Long id) {
 		 return repositorio.findById(id)
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
 	 }
 	 
-	 //@PutMapping("/empleados/{Id}")
+	 @PutMapping("/empleados/{Id}")
+	 Empleado modificarEmpleado(@RequestBody Empleado nuevoEmpleado, @PathVariable Long id) {
+		 return repositorio.findById(id)
+				 
+				 .map(empleado -> {
+					 empleado.setNombre(nuevoEmpleado.getNombre());
+					 empleado.setRol(nuevoEmpleado.getRol());
+					 return repositorio.save(nuevoEmpleado);
+				 })
+				 .orElseGet(() ->{
+					 nuevoEmpleado.setId(id);
+					 return repositorio.save(nuevoEmpleado);
+				 });
+				 
+	 }
 	 
+	 @DeleteMapping("/empleados/{id}")
+	 void eliminarEmpleado(@PathVariable Long id) {
+		 repositorio.deleteById(id);
+	 }
 	 
+	 /*
+	  * @RestController indica que los datos devueltos por cada método se escribirán directamente en el cuerpo de la respuesta en 
+	  * lugar de representar una plantilla.
+
+		El constructor inyecta un EmployeeRepository en el controlador.
+		
+		Tenemos rutas para cada operación (@GetMapping, @PostMapping, @PutMapping y @DeleteMapping, correspondientes a las llamadas HTTP GET, POST, PUT y DELETE). 
+		(NOTA: es útil leer cada método y entender lo que hacen).
+		
+		La excepción EmployeeNotFoundException es una excepción que se utiliza para indicar cuándo se busca a un empleado pero no se lo encuentra.
+		
+		Cuando se emite una excepción EmployeeNotFoundException, este dato adicional de la configuración de Spring MVC se usa para generar un HTTP 404
+	  * */
 	 
 	 
 	 
