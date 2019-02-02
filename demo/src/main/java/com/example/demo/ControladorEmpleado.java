@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 		 return repositorio.save(nuevoEmpleado);
 	 }
 	 //Obtendremos un empleado buscándolo por su Id. Si no lo encuentra lanzará una excepeción controlada
-	 @GetMapping("/empleados/{Id}")
+	 @GetMapping("/empleados/{id}")
 	 Empleado uno(@PathVariable Long id) {
 		 return repositorio.findById(id)
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));

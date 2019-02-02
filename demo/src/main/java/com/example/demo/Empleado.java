@@ -31,6 +31,10 @@ class Empleado {
 		this.rol = rol;
 		
 	}
+	
+	public Empleado(){
+		
+	}
 	/*
 	Con esta definición de objeto de dominio, ahora podemos recurrir a Spring Data JPA para manejar las tediosas interacciones 
 	de la base de datos. Los repositorios de Spring Data son interfaces con métodos que admiten la lectura, actualización, 
