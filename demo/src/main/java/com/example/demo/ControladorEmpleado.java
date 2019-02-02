@@ -5,8 +5,10 @@ package com.example.demo;
  * POST --> crear
  * */
 
+import java.lang.reflect.Method;
 import java.util.List;
 
+import org.springframework.hateoas.Resource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,22 +26,39 @@ import org.springframework.web.bind.annotation.RestController;
 		 this.repositorio = repositorio;	 
 		 
 	 }
+	
 	 //Usaremos localhost:8080/empleados para obtener TODOS los empleados gracias al uso de findAll()
 	 @GetMapping("/empleados")
 	 List<Empleado> all(){
 		 return repositorio.findAll();
 	 }
-	 //Post = insertar
-	 @PostMapping("/empleados")
-	 Empleado nuevoEmpleado(@RequestBody Empleado nuevoEmpleado) {
-		 return repositorio.save(nuevoEmpleado);
-	 }
+	 /*
 	 //Obtendremos un empleado buscándolo por su Id. Si no lo encuentra lanzará una excepeción controlada
 	 @GetMapping("/empleados/{id}")
 	 Empleado uno(@PathVariable Long id) {
 		 return repositorio.findById(id)
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
 	 }
+	 */
+	 //Post = insertar
+	 @PostMapping("/empleados")
+	 Empleado nuevoEmpleado(@RequestBody Empleado nuevoEmpleado) {
+		 return repositorio.save(nuevoEmpleado);
+	 }
+	
+	 
+	 @GetMapping ("/empleados/{id}")
+	 Resource<Empleado> uno(@PathVariable Long id){
+		 //Busca el empleado por Id, sino lo encuentras lanza la excepción especificada
+		 Empleado empleado = repositorio.findById(id)
+				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
+		 
+		 return new Resource<>(empleado,
+					linkTo(methodOn(ControladorEmpleado.class).uno(id)).withSelfRel(),
+					linkTo(methodOn(ControladorEmpleado.class).all()).withRel("empleados"));
+	 }
+	 
+	 
 	 
 	 @PutMapping("/empleados/{Id}")
 	 Empleado modificarEmpleado(@RequestBody Empleado nuevoEmpleado, @PathVariable Long id) {
