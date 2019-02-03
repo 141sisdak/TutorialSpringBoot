@@ -5,17 +5,13 @@ package com.example.demo;
  * POST --> crear
  * */
 
-import java.lang.reflect.Method;
+import org.springframework.hateoas.Resource;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import org.springframework.hateoas.Resource;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
  class ControladorEmpleado {
@@ -53,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 		 Empleado empleado = repositorio.findById(id)
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
 		 
-		 return new Resource<>(empleado,
+		 return new Resource<Empleado>(empleado,
 					linkTo(methodOn(ControladorEmpleado.class).uno(id)).withSelfRel(),
 					linkTo(methodOn(ControladorEmpleado.class).all()).withRel("empleados"));
 	 }
