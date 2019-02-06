@@ -36,12 +36,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
 	 }
 	 */
-	 //Post = insertar
-	 @PostMapping("/empleados")
-	 Empleado nuevoEmpleado(@RequestBody Empleado nuevoEmpleado) {
-		 return repositorio.save(nuevoEmpleado);
-	 }
-	
 	 
 	 @GetMapping ("/empleados/{id}")
 	 Resource<Empleado> uno(@PathVariable Long id){
@@ -53,6 +47,15 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 					linkTo(methodOn(ControladorEmpleado.class).uno(id)).withSelfRel(),
 					linkTo(methodOn(ControladorEmpleado.class).all()).withRel("empleados"));
 	 }
+	 
+	 
+	 
+	 //Post = insertar
+	 @PostMapping("/empleados")
+	 Empleado nuevoEmpleado(@RequestBody Empleado nuevoEmpleado) {
+		 return repositorio.save(nuevoEmpleado);
+	 }
+	
 	 
 	 
 	 
