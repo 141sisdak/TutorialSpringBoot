@@ -59,7 +59,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 	 
 	 
 	 
-	 @PutMapping("/empleados/{Id}")
+	 @PutMapping("/empleados/{id}")
 	 Empleado modificarEmpleado(@RequestBody Empleado nuevoEmpleado, @PathVariable Long id) {
 		 return repositorio.findById(id)
 				 
