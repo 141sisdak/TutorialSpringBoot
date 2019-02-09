@@ -67,7 +67,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 					 empleado.setNombre(nuevoEmpleado.getNombre());
 					 empleado.setRol(nuevoEmpleado.getRol());
 					 return repositorio.save(nuevoEmpleado);
-				 })
+				 }) 
+				 
+				 //.orElseThrow(() -> new EmpleadoNotFoundException(id));
+		 
 				 .orElseGet(() ->{
 					 nuevoEmpleado.setId(id);
 					 return repositorio.save(nuevoEmpleado);
