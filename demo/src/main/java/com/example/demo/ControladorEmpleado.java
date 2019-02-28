@@ -34,7 +34,7 @@ import java.util.List;
 	 }
 	 */
 	 @GetMapping ("/empleados/{id}")
-	 @ResponseStatus(HttpStatus.ACCEPTED)
+	 @ResponseStatus(HttpStatus.ACCEPTED)g
 	 public Empleado uno(@PathVariable Long id) {
 		 //Busca el empleado por Id, sino lo encuentras lanza la excepción especificada
 		 Empleado empleado = repositorio.findById(id)
