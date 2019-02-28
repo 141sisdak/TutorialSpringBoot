@@ -7,28 +7,25 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.EmpleadoNotFoundException;
 import com.example.demo.model.Empleado;
-import com.example.demo.repository.RepositorioEmpleado;
+import com.example.demo.service.EmpleadoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
  public class ControladorEmpleado {
 
-	private final RepositorioEmpleado repositorio;
-	 
-	 public ControladorEmpleado(RepositorioEmpleado repositorio){
-		 this.repositorio = repositorio;
-		 
-	 }
+	private final EmpleadoService empleadoService;
+
+	public ControladorEmpleado(EmpleadoService empleadoService){
+		this.empleadoService = empleadoService;
+	}
 	
 	 //Usaremos localhost:8080/empleados para obtener TODOS los empleados gracias al uso de findAll()
 	 @GetMapping("/empleados")
 	 public List<Empleado> all(){
-	 	List<Empleado> empleados = new ArrayList<>();
-		 repositorio.findAll().forEach(empleados::add);
+		 List<Empleado> empleados = empleadoService.getEmpleados();
 		 return empleados;
 	 }
 	 /*
