@@ -5,13 +5,10 @@ package com.example.demo;
  * POST --> crear
  * */
 
-import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
  class ControladorEmpleado {
@@ -36,16 +33,14 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
 	 }
 	 */
-	 
 	 @GetMapping ("/empleados/{id}")
-	 Resource<Empleado> uno(@PathVariable Long id){
+	 @ResponseStatus(HttpStatus.ACCEPTED)
+	 public Empleado uno(@PathVariable Long id) {
 		 //Busca el empleado por Id, sino lo encuentras lanza la excepción especificada
 		 Empleado empleado = repositorio.findById(id)
 				 .orElseThrow(() -> new EmpleadoNotFoundException(id));
-		 
-		 return new Resource<Empleado>(empleado,
-					linkTo(methodOn(ControladorEmpleado.class).uno(id)).withSelfRel(),
-					linkTo(methodOn(ControladorEmpleado.class).all()).withRel("empleados"));
+
+		 return empleado;
 	 }
 	 
 	 
