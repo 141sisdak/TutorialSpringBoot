@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EmpleadoPersistence {
@@ -22,4 +23,28 @@ public class EmpleadoPersistence {
         repositorioEmpleado.findAll().forEach(empleados::add);
         return empleados;
     }
+    
+    public Empleado getEmpleado(Long id) {
+    	 Empleado empleado = repositorioEmpleado.findById(id).get();
+		 return empleado;
+    }
+    
+    public Empleado nuevoEmpleado(Empleado emp) {
+    	Empleado nuevo = repositorioEmpleado.save(emp);
+    	return nuevo;
+    }
+    
+    public Empleado modificar (Empleado emp, Long id) {
+    	Empleado empleado = getEmpleado(id);
+    	empleado.setNombre(emp.getNombre());
+    	empleado.setRol(emp.getRol());
+    	return empleado;
+    }
+    
+    public void elimiarEmpleado(Long id) {
+    	repositorioEmpleado.deleteById(id);
+    }
+    
+    
+    
 }

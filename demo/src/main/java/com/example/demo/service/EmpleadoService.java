@@ -22,4 +22,23 @@ public class EmpleadoService {
         List<Empleado> empleados = empleadoPersistence.findAll();
         return empleados;
     }
+    
+    public Empleado getEmpleado(Long id) {
+   	 Empleado empleado = empleadoPersistence.getEmpleado(id);
+		 return empleado;
+   }
+    
+    public Empleado nuevoEmpleado(Empleado emp) {
+    	Empleado empleado = empleadoPersistence.nuevoEmpleado(emp);
+    	return empleado;
+    }
+    
+    public Empleado modificar (Empleado emp, Long id) {
+    	Empleado empleado = empleadoPersistence.modificar(emp, id);
+    	return empleado;
+    }
+    
+    public void eliminarEmpleado(Long id) {
+    	empleadoPersistence.elimiarEmpleado(id);
+    }
 }

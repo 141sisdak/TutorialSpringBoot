@@ -36,13 +36,7 @@ public class Empleado {
 	public Empleado(){
 		
 	}
-	/*
-	Con esta definición de objeto de dominio, ahora podemos recurrir a Spring Data JPA para manejar las tediosas interacciones 
-	de la base de datos. Los repositorios de Spring Data son interfaces con métodos que admiten la lectura, actualización, 
-	eliminación y creación de registros en un almacén de datos de back-end. Algunos repositorios también admiten la paginación de 
-	datos y la clasificación, cuando sea apropiado. Spring Data sintetiza implementaciones basadas en las convenciones encontradas 
-	en la denominación de los métodos en la interfaz.
-	*/
+	
 
 	public Long getId() {
 		return id;
