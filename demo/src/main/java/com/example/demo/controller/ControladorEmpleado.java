@@ -25,8 +25,10 @@ import java.util.List;
 	
 	 @GetMapping("/empleados")
 	 public List<Empleado> all(){
+		 
 		 List<Empleado> empleados = empleadoService.getEmpleados();
 		 return empleados;
+		
 	 }
 	
 	 @GetMapping ("/empleados/{id}")
@@ -34,7 +36,12 @@ import java.util.List;
 	 public Empleado uno(@PathVariable Long id) {
 		 //Busca el empleado por Id, sino lo encuentras lanza la excepción especificada
 		 Empleado empleado = empleadoService.getEmpleado(id);
-		 return empleado;
+		 if (empleado == null) {
+			 throw new EmpleadoNotFoundException(id);
+		 }else {
+			 return empleado;
+		 }
+		 
 	 }
 	 
 	 //Post = insertar
