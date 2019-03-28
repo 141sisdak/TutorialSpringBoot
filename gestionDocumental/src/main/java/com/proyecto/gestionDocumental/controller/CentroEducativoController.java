@@ -2,6 +2,8 @@ package com.proyecto.gestionDocumental.controller;
 
 import java.util.List;
 
+import com.proyecto.gestionDocumental.converter.CentroEducativoConverter;
+import com.proyecto.gestionDocumental.dto.CentroEducativoDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,12 @@ import com.proyecto.gestionDocumental.service.CentroEducativoService;
 public class CentroEducativoController {
 	
 	private final CentroEducativoService centroEdService;
-	
-	public CentroEducativoController(CentroEducativoService centroEdService) {
+	private final CentroEducativoConverter converter;
+
+	public CentroEducativoController(CentroEducativoService centroEdService,
+									 CentroEducativoConverter converter) {
 		this.centroEdService = centroEdService;
+		this.converter = converter;
 	}
 	
 	@GetMapping("/centrosEducativos")
@@ -40,8 +45,10 @@ public class CentroEducativoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void nuevoCentroEducativo (@RequestBody CentroEducativo nuevoCentroEd) {
-		centroEdService.nuevoCentroEducativo(nuevoCentroEd);
+	public CentroEducativoDto nuevoCentroEducativo (@RequestBody CentroEducativoDto nuevoCentroEd) {
+		CentroEducativo created = centroEdService.nuevoCentroEducativo(nuevoCentroEd);
+		CentroEducativoDto dto = converter.toDto(created);
+		return dto;
 	}
 	
 	@DeleteMapping("/centrosEducativos/{id}")

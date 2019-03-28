@@ -33,9 +33,10 @@ public class CentroEducativoPersistence {
 		
 	}
 	
-	public void nuevoCentroEducativo(CentroEducativo centroEd) {
+	public CentroEducativo nuevoCentroEducativo(CentroEducativo centroEd) {
 		//Se puede controlar si se introducen valores null desde aquí???
-		centroEdRep.save(centroEd);
+		CentroEducativo created = centroEdRep.save(centroEd);
+		return created;
 	}
 	
 	public void modCentroEducativo(CentroEducativo cen, Integer id) {

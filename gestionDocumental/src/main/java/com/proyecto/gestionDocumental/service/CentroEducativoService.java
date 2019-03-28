@@ -1,21 +1,23 @@
 package com.proyecto.gestionDocumental.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.proyecto.gestionDocumental.converter.CentroEducativoConverter;
+import com.proyecto.gestionDocumental.dto.CentroEducativoDto;
 import com.proyecto.gestionDocumental.model.CentroEducativo;
 import com.proyecto.gestionDocumental.repository.CentroEducativoPersistence;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CentroEducativoService {
 	
 	private CentroEducativoPersistence centroEdPersistence;
-	
-	@Autowired
-	public CentroEducativoService( CentroEducativoPersistence centroEdPersistence) {
+	private final CentroEducativoConverter converter;
+
+	public CentroEducativoService(CentroEducativoPersistence centroEdPersistence,
+								  CentroEducativoConverter converter) {
 		this.centroEdPersistence = centroEdPersistence;
+		this.converter = converter;
 	}
 	
 	public List<CentroEducativo> getCentrosEducativos(){
@@ -28,10 +30,13 @@ public class CentroEducativoService {
 		return centro;
 	}
 	
-	public void nuevoCentroEducativo(CentroEducativo cen) {
-		centroEdPersistence.nuevoCentroEducativo(cen);
+	public CentroEducativo nuevoCentroEducativo(CentroEducativoDto cen) {
+		CentroEducativo centroEducativo = converter.dtoTo(cen);
+		return centroEdPersistence.nuevoCentroEducativo(centroEducativo);
 	}
-	
+
+
+
 	public void modificarCentroEd(CentroEducativo cen, Integer id) {
 		centroEdPersistence.modCentroEducativo(cen, id);
 	}
