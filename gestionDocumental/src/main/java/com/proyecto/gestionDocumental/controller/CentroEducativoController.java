@@ -29,13 +29,9 @@ public class CentroEducativoController {
 		return centros;
 	}
 	
-//	@GetMapping("/centrosEducativos")
-//	public @ResponseBody Iterable<CentroEducativo> getAllUsers() {
-//		// This returns a JSON or XML with the users
-//		return centroEdService.getCentrosEducativos();
-//	}
+
 	
-	@GetMapping("/centrosEducativos/{id}")//con id_centroEducativo tampoco funciona
+	@GetMapping("/centrosEducativos/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public CentroEducativo uno(@PathVariable Integer id) {
 		
@@ -48,6 +44,16 @@ public class CentroEducativoController {
 	public CentroEducativoDto nuevoCentroEducativo (@RequestBody CentroEducativoDto nuevoCentroEd) {
 		CentroEducativo created = centroEdService.nuevoCentroEducativo(nuevoCentroEd);
 		CentroEducativoDto dto = converter.toDto(created);
+		return dto;
+	}
+	
+	@PutMapping("/centrosEducativos/{id}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public CentroEducativoDto centroEdModificar(@PathVariable Integer id, @RequestBody CentroEducativoDto cen) {
+		CentroEducativo centroMod = centroEdService.modificarCentroEd(cen, id);					
+		CentroEducativoDto dto = converter.toDto(centroMod);
+		System.out.println(dto);
+		
 		return dto;
 	}
 	

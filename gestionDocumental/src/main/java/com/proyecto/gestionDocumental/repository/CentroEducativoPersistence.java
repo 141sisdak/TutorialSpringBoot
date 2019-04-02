@@ -39,7 +39,7 @@ public class CentroEducativoPersistence {
 		return created;
 	}
 	
-	public void modCentroEducativo(CentroEducativo cen, Integer id) {
+	public CentroEducativo modCentroEducativo(CentroEducativo cen, Integer id) {
 		CentroEducativo centro = getCentroEducativo(id);
 		centro.setDirector(cen.getDirector());
 		centro.setDireccion(cen.getDireccion());
@@ -48,6 +48,7 @@ public class CentroEducativoPersistence {
 		centro.setFax(cen.getFax());
 		centro.setCp(cen.getCp());
 		centro.setNombreCentro(cen.getNombreCentro());
+		return centro;
 		
 	}
 	

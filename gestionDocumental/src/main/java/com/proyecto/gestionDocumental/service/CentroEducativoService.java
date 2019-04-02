@@ -37,8 +37,9 @@ public class CentroEducativoService {
 
 
 
-	public void modificarCentroEd(CentroEducativo cen, Integer id) {
-		centroEdPersistence.modCentroEducativo(cen, id);
+	public CentroEducativo modificarCentroEd(CentroEducativoDto cen, Integer id) {
+		CentroEducativo centroEducativo = converter.dtoTo(cen);
+		return centroEdPersistence.modCentroEducativo(cen, id);
 	}
 	
 	public void eliminarCentroEducativo(Integer id) {

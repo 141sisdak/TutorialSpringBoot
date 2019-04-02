@@ -18,6 +18,7 @@ public class CentroEducativo implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@Column(name="id_centroeducativo")
 	private Integer id_centroEducativo;
 	
 	
