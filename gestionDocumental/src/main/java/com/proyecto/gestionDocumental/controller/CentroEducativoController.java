@@ -40,6 +40,7 @@ public class CentroEducativoController {
 	}
 	
 	@PostMapping
+	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public CentroEducativoDto nuevoCentroEducativo (@RequestBody CentroEducativoDto nuevoCentroEd) {
 		CentroEducativo created = centroEdService.nuevoCentroEducativo(nuevoCentroEd);
