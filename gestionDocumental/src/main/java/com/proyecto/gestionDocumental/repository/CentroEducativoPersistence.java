@@ -41,14 +41,7 @@ public class CentroEducativoPersistence {
 	
 	public CentroEducativo modCentroEducativo(CentroEducativo cen, Integer id) {
 		CentroEducativo updated = centroEdRep.save(cen);
-//		CentroEducativo centro = getCentroEducativo(id);
-//		centro.setDirector(cen.getDirector());
-//		centro.setDireccion(cen.getDireccion());
-//		centro.setCif(cen.getCif());
-//		centro.setTelefono(cen.getTelefono());
-//		centro.setFax(cen.getFax());
-//		centro.setCp(cen.getCp());
-//		centro.setNombreCentro(cen.getNombreCentro());
+
 		return updated;
 		
 	}

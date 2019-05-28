@@ -12,56 +12,51 @@ import com.proyecto.gestionDocumental.service.CentroEducativoService;
 
 @RestController
 public class CentroEducativoController {
-	
+
 	private final CentroEducativoService centroEdService;
 	private final CentroEducativoConverter converter;
 
-	public CentroEducativoController(CentroEducativoService centroEdService,
-									 CentroEducativoConverter converter) {
+	public CentroEducativoController(CentroEducativoService centroEdService, CentroEducativoConverter converter) {
 		this.centroEdService = centroEdService;
 		this.converter = converter;
 	}
-	
+
 	@GetMapping("/centrosEducativos")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public List<CentroEducativo> todos(){
+	public List<CentroEducativo> todos() {
 		List<CentroEducativo> centros = centroEdService.getCentrosEducativos();
 		return centros;
 	}
-	
 
-	
 	@GetMapping("/centrosEducativos/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public CentroEducativo uno(@PathVariable Integer id) {
-		
+
 		CentroEducativo centro = centroEdService.getCentroEducativo(id);
 		return centro;
 	}
-	
-	@PostMapping
-	
+
+	@PostMapping("/centroEducativo")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public CentroEducativoDto nuevoCentroEducativo (@RequestBody CentroEducativoDto nuevoCentroEd) {
+	public CentroEducativoDto nuevoCentroEducativo(@RequestBody CentroEducativoDto nuevoCentroEd) {
 		CentroEducativo created = centroEdService.nuevoCentroEducativo(nuevoCentroEd);
 		CentroEducativoDto dto = converter.toDto(created);
 		return dto;
 	}
-	
-	@PutMapping("/centrosEducativos/{id}")
+
+	@PutMapping("/centrosEducativo/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public CentroEducativoDto centroEdModificar(@PathVariable Integer id, @RequestBody CentroEducativoDto cen) {
-		CentroEducativo centroMod = centroEdService.modificarCentroEd(cen, id);					
+		CentroEducativo centroMod = centroEdService.modificarCentroEd(cen, id);
 		CentroEducativoDto dto = converter.toDto(centroMod);
-		System.out.println(dto);
-		
 		return dto;
 	}
-	
-	@DeleteMapping("/centrosEducativos/{id}")
+
+	@DeleteMapping("/centrosEducativo/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void eliminarCentroEducativo(Integer id) {
+	public String eliminarCentroEducativo(@PathVariable Integer id) {
 		centroEdService.eliminarCentroEducativo(id);
+		return "Centro Educativo eliminado";
 	}
 
 }
