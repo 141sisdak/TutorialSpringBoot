@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 2: <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+ 3: <hibernate-configuration>
+ 4:   <session-factory>
+ 5:     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+ 6:     <property name="connection.url">jdbc:mysql://localhost:3306/gestion_documental?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC</property>
+ 7:     <property name="connection.username">root</property>
+ 8:     <property name="connection.password">mysql</property>
+ 9:     <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+10:     <property name="hibernate.show_sql">true</property>
+11:
+12:    
+13:     <mapping class="com.proyecto.gestionDocumental.model.CentroEducativo"/>
+14:     <mapping class="com.proyecto.gestionDocumental.model.CentroTrabajo"/>
+15:     <mapping class="com.proyecto.gestionDocumental.model.Documentos"/>
+16:     <mapping class="com.proyecto.gestionDocumental.model.Empresa"/>
+17:     <mapping class="com.proyecto.gestionDocumental.model.Permisos"/>
+18:     <mapping class="com.proyecto.gestionDocumental.model.Responsable"/>
+19:     <mapping class="com.proyecto.gestionDocumental.model.Rol"/>
+20:     <mapping class="com.proyecto.gestionDocumental.model.RolPermisos"/>
+21:     <mapping class="com.proyecto.gestionDocumental.model.Usuarios"/>
+22:
+23:   </session-factory>
+24: </hibernate-configuration>

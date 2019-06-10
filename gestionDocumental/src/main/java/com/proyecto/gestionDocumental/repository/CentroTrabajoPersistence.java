@@ -10,10 +10,10 @@ import com.proyecto.gestionDocumental.model.CentroTrabajo;
 
 @Component
 public class CentroTrabajoPersistence {
-	
+	@Autowired
 	private CentroTrabajoRepository centroTrabRep;
 	
-	@Autowired
+	
 	public CentroTrabajoPersistence(CentroTrabajoRepository centroTrabRep) {
 		this.centroTrabRep = centroTrabRep;
 	}
